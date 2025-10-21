@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinto Board Game</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Georgia, serif;
+            background: linear-gradient(135deg, #78350f, #92400e, #78350f);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .game-container {
+            background: linear-gradient(135deg, #fef3c7, #fef9e7);
+            border: 8px solid #78350f;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        h1 {
+            text-align: center;
+            color: #78350f;
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+        .scores {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        .score-box {
+            padding: 15px 30px;
+            border-radius: 8px;
+            border: 2px solid #d97706;
+            background: #fef3c7;
+            text-align: center;
+        }
+        .score-box.active {
+            background: #fde68a;
+            border-color: #78350f;
+        }
+        .score-label {
+            color: #78350f;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .score-value {
+            color: #78350f;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .message {
+            text-align: center;
+            padding: 15px;
+            background: #fde68a;
+            border: 2px solid #78350f;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: #78350f;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(9, 50px);
+            gap: 2px;
+            padding: 15px;
+            background: #92400e;
+            border-radius: 8px;
+            margin: 0 auto 30px;
+            width: fit-content;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #a8a29e;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #e7e5e4;
+        }
+        .cell:hover { background: #d6d3d1; }
+        .cell.filled {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #78350f;
+        }
+        .cell.red-five {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+        .hand-section { margin-bottom: 30px; }
+        .hand-title {
+            text-align: center;
+            color: #78350f;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .hand {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .tile {
+            width: 65px;
+            height: 65px;
+            border: 2px solid #d97706;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #78350f;
+        }
+        .tile:hover { transform: scale(1.1); }
+        .tile.selected {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            border-color: #15803d;
+        }
+        .tile.used { opacity: 0.3; cursor: not-allowed; }
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        button {
+            font-family: inherit;
+            font-weight: bold;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .submit-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+        .submit-btn:disabled {
+            background: #d1d5db;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+        .undo-btn {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+        }
+        .undo-btn:disabled {
+            background: #d1d5db;
+            color: #6b7280;
+            cursor: not-allowed;
+        }
+        .new-game-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+        }
+        .tiles-remaining {
+            text-align: center;
+            color: #78350f;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>QUINTO</h1>
+        <div class="scores">
+            <div class="score-box" id="player-score-box">
+                <div class="score-label">You</div>
+                <div class="score-value" id="player-score">0</div>
+            </div>
+            <div class="score-box" id="bot-score-box">
+                <div class="score-label">Bot</div>
+                <div class="score-value" id="bot-score">0</div>
+            </div>
+        </div>
+        <div class="message" id="message">Place tiles adjacent to the red 5</div>
+        <div class="board" id="board"></div>
+        <div class="hand-section">
+            <div class="hand-title">Your Hand</div>
+            <div class="hand" id="hand"></div>
+        </div>
+        <div class="controls" id="controls">
+            <button class="submit-btn" id="submit-btn" disabled>Submit Turn (0)</button>
+            <button class="undo-btn" id="undo-btn" disabled>Undo</button>
+        </div>
+        <div class="tiles-remaining" id="tiles-remaining">Tiles: 90</div>
+        <button class="new-game-btn" onclick="newGame()">New Game</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script>
+        const SIZE = 9, CENTER = 4, HAND = 5;
+        let state = { board: [], temp: [], pHand: [], bHand: [], bag: [], sel: null, turn: 1, 
+                      scores: {p:0, b:0}, placed: [] };
+
+        function newGame() {
+            state.bag = [];
+            for(let i=0; i<=9; i++) for(let j=0; j<10; j++) state.bag.push(i);
+            state.bag = _.shuffle(state.bag);
+            state.pHand = state.bag.splice(0, HAND);
+            state.bHand = state.bag.splice(0, HAND);
+            state.board = Array(SIZE).fill(0).map(() => Array(SIZE).fill(null));
+            state.board[CENTER][CENTER] = 5;
+            state.temp = state.board.map(r => [...r]);
+            state.turn = 1;
+            state.scores = {p:0, b:0};
+            state.sel = null;
+            state.placed = [];
+            draw();
+        }
+
+        function draw() {
+            const boardEl = document.getElementById('board');
+            boardEl.innerHTML = '';
+            for(let r=0; r<SIZE; r++) {
+                for(let c=0; c<SIZE; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    const v = state.temp[r][c];
+                    if(v !== null) {
+                        cell.classList.add('filled');
+                        if(r===CENTER && c===CENTER) cell.classList.add('red-five');
+                        cell.textContent = v;
+                    }
+                    cell.onclick = () => clickCell(r,c);
+                    boardEl.appendChild(cell);
+                }
+            }
+            
+            const handEl = document.getElementById('hand');
+            handEl.innerHTML = '';
+            state.pHand.forEach((t,i) => {
+                const tile = document.createElement('div');
+                tile.className = 'tile';
+                tile.textContent = t;
+                const used = state.placed.some(p => p.hi === i);
+                if(used) tile.classList.add('used');
+                else if(state.sel?.i === i) tile.classList.add('selected');
+                if(!used && state.turn===1) tile.onclick = () => {state.sel = {t,i}; draw();};
+                handEl.appendChild(tile);
+            });
+
+            document.getElementById('player-score').textContent = state.scores.p;
+            document.getElementById('bot-score').textContent = state.scores.b;
+            document.getElementById('player-score-box').classList.toggle('active', state.turn===1);
+            document.getElementById('bot-score-box').classList.toggle('active', state.turn===2);
+            
+            const sub = document.getElementById('submit-btn');
+            const und = document.getElementById('undo-btn');
+            const con = document.getElementById('controls');
+            if(state.turn===1) {
+                con.classList.remove('hidden');
+                sub.disabled = und.disabled = state.placed.length===0;
+                sub.textContent = `Submit Turn (${state.placed.length})`;
+                sub.onclick = submit;
+                und.onclick = undo;
+            } else con.classList.add('hidden');
+            
+            document.getElementById('tiles-remaining').textContent = `Tiles: ${state.bag.length}`;
+        }
+
+        function msg(m) { document.getElementById('message').textContent = m; }
+
+        function clickCell(r,c) {
+            if(state.turn!==1 || !state.sel) return msg('Select a tile first');
+            if(state.temp[r][c] !== null) return msg('Space occupied');
+            
+            if(state.placed.length===0) {
+                if(!adj(state.temp,r,c)) return msg('Must be adjacent');
+            } else {
+                const rows = [...state.placed.map(p=>p.r), r];
+                const cols = [...state.placed.map(p=>p.c), c];
+                if(!(rows.every(x=>x===rows[0]) || cols.every(x=>x===cols[0]))) 
+                    return msg('Must be in one line');
+            }
+            
+            if(exceed(state.temp,r,c)) return msg('Max 5 tiles per row');
+            
+            state.temp[r][c] = state.sel.t;
+            state.placed.push({r,c,t:state.sel.t,hi:state.sel.i});
+            state.sel = null;
+            msg(`${state.placed.length} placed`);
+            draw();
+        }
+
+        function adj(b,r,c) {
+            return [[r-1,c],[r+1,c],[r,c-1],[r,c+1]].some(([nr,nc]) => 
+                nr>=0 && nr<SIZE && nc>=0 && nc<SIZE && b[nr][nc]!==null);
+        }
+
+        function exceed(b,r,c) {
+            let h=1, v=1;
+            for(let i=c-1; i>=0 && b[r][i]!==null; i--) h++;
+            for(let i=c+1; i<SIZE && b[r][i]!==null; i++) h++;
+            for(let i=r-1; i>=0 && b[i][c]!==null; i--) v++;
+            for(let i=r+1; i<SIZE && b[i][c]!==null; i++) v++;
+            return h>5 || v>5;
+        }
+
+        function undo() {
+            if(state.placed.length===0) return;
+            const p = state.placed.pop();
+            state.temp[p.r][p.c] = null;
+            msg(`Removed. ${state.placed.length} placed`);
+            draw();
+        }
+
+        function submit() {
+            if(state.placed.length===0) return;
+            
+            const val = validate(state.temp, state.placed);
+            if(!val.ok) return msg(val.msg);
+            
+            state.scores.p += val.score;
+            const idx = state.placed.map(p=>p.hi).sort((a,b)=>b-a);
+            idx.forEach(i => state.pHand.splice(i,1));
+            for(let i=0; i<idx.length && state.bag.length>0; i++) 
+                state.pHand.push(state.bag.shift());
+            
+            state.board = state.temp.map(r=>[...r]);
+            state.placed = [];
+            state.turn = 2;
+            msg(`You scored ${val.score}! Bot thinking...`);
+            draw();
+            setTimeout(botTurn, 1000);
+        }
+
+        function validate(b, tiles) {
+            let score = 0;
+            const seen = new Set();
+            
+            for(const t of tiles) {
+                const h = lineSum(b,t.r,t.c,0,1);
+                if(h>0 && !seen.has(`h${t.r}`)) {
+                    if(complete(b,t.r,t.c,0,1)) {
+                        if(h%5!==0) return {ok:false, msg:`Row=${h}, need multiple of 5`};
+                        score += h;
+                        seen.add(`h${t.r}`);
+                    }
+                }
+                
+                const v = lineSum(b,t.r,t.c,1,0);
+                if(v>0 && !seen.has(`v${t.c}`)) {
+                    if(complete(b,t.r,t.c,1,0)) {
+                        if(v%5!==0) return {ok:false, msg:`Col=${v}, need multiple of 5`};
+                        score += v;
+                        seen.add(`v${t.c}`);
+                    }
+                }
+            }
+            return {ok:true, score};
+        }
+
+        function lineSum(b,r,c,dr,dc) {
+            let s = b[r][c], n = 1;
+            let rr=r+dr, cc=c+dc;
+            while(rr>=0 && rr<SIZE && cc>=0 && cc<SIZE && b[rr][cc]!==null) {
+                s += b[rr][cc]; n++; rr+=dr; cc+=dc;
+            }
+            rr=r-dr; cc=c-dc;
+            while(rr>=0 && rr<SIZE && cc>=0 && cc<SIZE && b[rr][cc]!==null) {
+                s += b[rr][cc]; n++; rr-=dr; cc-=dc;
+            }
+            return n>1 ? s : 0;
+        }
+
+        function complete(b,r,c,dr,dc) {
+            let rr=r, cc=c;
+            while(rr-dr>=0 && rr-dr<SIZE && cc-dc>=0 && cc-dc<SIZE && b[rr-dr][cc-dc]!==null) {
+                rr-=dr; cc-=dc;
+            }
+            let r2=r, c2=c;
+            while(r2+dr>=0 && r2+dr<SIZE && c2+dc>=0 && c2+dc<SIZE && b[r2+dr][c2+dc]!==null) {
+                r2+=dr; c2+=dc;
+            }
+            return (rr-dr<0||rr-dr>=SIZE||cc-dc<0||cc-dc>=SIZE||b[rr-dr][cc-dc]===null) && 
+                   (r2+dr<0||r2+dr>=SIZE||c2+dc<0||c2+dc>=SIZE||b[r2+dr][c2+dc]===null);
+        }
+
+        function botTurn() {
+            const moves = findMoves(state.board, state.bHand);
+            if(moves.length===0) {
+                msg("Bot has no moves!");
+                state.turn=1;
+                draw();
+                return;
+            }
+            
+            const best = _.maxBy(moves, 'score');
+            best.tiles.forEach(t => state.board[t.r][t.c] = t.t);
+            state.scores.b += best.score;
+            
+            const idx = best.tiles.map(t=>t.hi).sort((a,b)=>b-a);
+            idx.forEach(i => state.bHand.splice(i,1));
+            for(let i=0; i<idx.length && state.bag.length>0; i++) 
+                state.bHand.push(state.bag.shift());
+            
+            state.temp = state.board.map(r=>[...r]);
+            state.turn = 1;
+            msg(`Bot scored ${best.score}. Your turn!`);
+            draw();
+        }
+
+        function findMoves(b, hand) {
+            const moves = [];
+            for(let r=0; r<SIZE; r++) {
+                for(let c=0; c<SIZE; c++) {
+                    if(b[r][c]===null && adj(b,r,c)) {
+                        for(let n=1; n<=Math.min(5,hand.length); n++) {
+                            const combos = _.combinations(hand.map((t,i)=>({t,i})), n);
+                            combos.forEach(combo => {
+                                // Try horizontal
+                                let test = b.map(row=>[...row]);
+                                let tiles = [];
+                                let ok = true;
+                                for(let i=0; i<combo.length; i++) {
+                                    if(c+i>=SIZE || test[r][c+i]!==null || exceed(test,r,c+i)) {
+                                        ok=false; break;
+                                    }
+                                    test[r][c+i] = combo[i].t;
+                                    tiles.push({r,c:c+i,t:combo[i].t,hi:combo[i].i});
+                                }
+                                if(ok) {
+                                    const val = validate(test, tiles);
+                                    if(val.ok) moves.push({tiles, score:val.score});
+                                }
+                                
+                                // Try vertical
+                                test = b.map(row=>[...row]);
+                                tiles = [];
+                                ok = true;
+                                for(let i=0; i<combo.length; i++) {
+                                    if(r+i>=SIZE || test[r+i][c]!==null || exceed(test,r+i,c)) {
+                                        ok=false; break;
+                                    }
+                                    test[r+i][c] = combo[i].t;
+                                    tiles.push({r:r+i,c,t:combo[i].t,hi:combo[i].i});
+                                }
+                                if(ok) {
+                                    const val = validate(test, tiles);
+                                    if(val.ok) moves.push({tiles, score:val.score});
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+            return moves;
+        }
+
+        _.combinations = function(arr, k) {
+            if(k===1) return arr.map(x=>[x]);
+            const result = [];
+            for(let i=0; i<=arr.length-k; i++) {
+                const rest = _.combinations(arr.slice(i+1), k-1);
+                rest.forEach(r => result.push([arr[i], ...r]));
+            }
+            return result;
+        };
+
+        newGame();
+    </script>
+</body>
+</html>

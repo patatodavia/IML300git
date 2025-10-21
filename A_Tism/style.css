@@ -1,0 +1,65 @@
+* {
+  margin:0;
+  padding: 0;
+  box-sizing:border-box;
+}
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #000000;
+  color: #FFFFFF;
+  font-family: 'Gill Sans', sans-serif;
+  display:flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #FFFFFF;
+  margin: 20px 0;
+}
+
+h2 {
+  color: #FFFFFF;
+  margin: 20px 0;
+  text-size-adjust: 10px;
+  text-decoration: underline;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding: 40px;
+}
+
+.FootnoteStay {
+  margin-top: auto;
+  padding: 30px;
+  background: #1d1d1d;
+  border-top: 2px solid #FFFFFF;
+  text-align: center;
+}
+.FootnoteStay p {
+  line-height: 1.4;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: red;
+}
+ul{
+  list-style: none;
+  margin-top: 10px;
+}
+ul li {
+  margin: 8px 0;
+}
