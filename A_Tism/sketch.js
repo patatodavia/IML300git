@@ -2,7 +2,7 @@ let bursts = [];
 let bulbs = [];
 
 function setup() {
-  createCanvas(800, 400);
+  createCanvas(windowWidth, windowHeight);
   strokeCap(ROUND);
   strokeJoin(ROUND);
   

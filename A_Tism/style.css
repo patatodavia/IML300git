@@ -2,9 +2,29 @@
   margin:0;
   padding: 0;
   box-sizing:border-box;
-}
+  font-family: 'Arvo', sans-serif;
+  } 
 html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
+  width: 100%;
+}
+
+canvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;  /* This puts the canvas BEHIND everything */
+}
+
+/* Style your text content */
+.content-wrapper {
+  position: relative;  /* Makes sure it's above the canvas */
+  z-index: 1;  /* Explicitly puts it in front */
+  padding: 40px;
+  color: white;  /* Make sure text is visible against your sketch */
 }
 
 body {
@@ -15,30 +35,212 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+.main{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
 h1 {
-  color: #FFFFFF;
-  margin: 20px 0;
+    color: #FFFFFF;
+    margin: 0 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 7rem;
+}
+.mainTitle {
+  padding-bottom: 5rem;
+}
+   
+.roller{
+  height: 10rem;
+  line-height: 4rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: coral;
+}
+#spare-time{
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 1rem;
+  margin-top: 0;
+  color: #A8DADC;
+  
+}
+
+.roller #rolltext {
+  position: absolute;
+  top: 0;
+  animation: slide 8s infinite;  
+  justify-content: center;
+  align-items: center;
+}
+
+li {
+  text-align: center;
+}
+h2 {
+  color: coral;
+  text-align: center;
+  text-decoration: wavy;
+  font-size: 2rem;
+}
+
+@keyframes slide {
+  0%{
+    top:0;
+  }
+  25%{
+    top: -4rem;    
+  }
+  50%{
+    top: -8rem;
+  }
+  72.5%{
+    top: -12.25rem;
+  }
+}
+
+@media screen and (max-width: 600px){
+  h1{
+  text-align:center;
+  text-transform: uppercase;
+  color: #F1FAEE; 
+  font-size: 2.125rem;
+}
+  
+  .roller{
+  height: 10rem; 
+  line-height: 2.125rem;  
+  }
+  
+  #spare-time {
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+  }
+  
+  .roller #rolltext {  
+  animation: slide-mob 60s infinite;  
+}
+  
+  @keyframes slide-mob {
+  0%{
+    top:0;
+  }
+  25%{
+    top: -2.125rem;    
+  }
+  50%{
+    top: -4.25rem;
+  }
+  72.5%{
+    top: -6.375rem;
+  }
+}
+}
+/* Rotating Links Roller */
+.roller-links {
+  color: white;
+  margin: 30px auto;
+  height: 3rem;
+  line-height: 3rem;
+  align-items: center;
+}
+
+.roller-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 2rem;
+  transition: color 0.3s;
+}
+
+.roller-links a:hover {
+  color: coral;
+  text-decoration: underline;
+}
+
+#rolltext-links {
+  position: absolute;
+  top: 0;
+  animation: slide-links 8s infinite;  
+}
+
+@keyframes slide-links {
+  0%{
+    top:0;
+  }
+  25%{
+    top: -3rem;    
+  }
+  50%{
+    top: -6rem;
+  }
+  75%{
+    top: -9rem;
+  }
+}
+
+/* Mobile version for link roller */
+@media screen and (max-width: 600px){
+  .roller-links {
+    height: 2rem;
+    line-height: 2rem;
+  }
+  
+  .roller-links a {
+    font-size: 1.5rem;
+  }
+  
+  #rolltext-links {  
+    animation: slide-links-mob 8s infinite;  
+  }
+  
+  @keyframes slide-links-mob {
+    0%{
+      top:0;
+    }
+    25%{
+      top: -2rem;    
+    }
+    50%{
+      top: -4rem;
+    }
+    75%{
+      top: -6rem;
+    }
+  }
 }
 
 h2 {
-  color: #FFFFFF;
+  color:#f7C6c7;
   margin: 20px 0;
+  text-transform: uppercase;
   text-size-adjust: 10px;
   text-decoration: underline;
 }
 
 .content-wrapper {
-  flex: 1;
+  flex: 1;  
   padding: 40px;
 }
 
 .FootnoteStay {
   margin-top: auto;
-  padding: 30px;
+  padding: 20px;
   background: #1d1d1d;
   border-top: 2px solid #FFFFFF;
   text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 .FootnoteStay p {
   line-height: 1.4;
@@ -50,16 +252,219 @@ a{
   color: white;
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.7rem;
 }
 
 a:hover {
   text-decoration: underline;
   color: red;
 }
-ul{
+/* General list styles (if you have any lists elsewhere) */
+ul {
   list-style: none;
   margin-top: 10px;
 }
+
 ul li {
   margin: 8px 0;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Specific styles for hallway page lists */
+.hallway-list {
+  list-style: disc;  /* or circle, square, etc. */
+  padding-left: 40px;
+  margin-top: 20px;
+}
+
+.hallway-list li {
+  margin: 15px 0;
+  color: coral;  /* or whatever color you want */
+  font-size: 1.2rem;
+}
+h4 {
+  color: coral;
+    margin: 20px 0;
+    text-align: left;
+    font-size: 3rem;
+    padding-top: 23rem;
+    padding-left: 15rem;
+}
+.moreInfo {
+ padding-bottom: 50rem;
+ padding-right: 15rem;
+}
+
+.loading-text {
+	place-self: center;
+	background: linear-gradient(90deg, white, red) -100%/ 200%;
+	/* being excessively careful with compat, 
+	 * though this has been supported unprefixed and 
+	 * in the shorthand across major browsers for a while */
+	-webkit-background-clip: text;
+	        background-clip: text;
+	/* use color, don't use -webkit-text-fill-color anymore, 
+	 * was meant to solve a problem we haven't had in years */
+	color: transparent;
+	font: 900 clamp(2em, 10vw, 10em) exo, sans-serif;
+	animation: shimmer 2s linear infinite
+}
+
+@keyframes shimmer { to { background-position: 100% } }
+
+/* Stress Indicator */
+#stress-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  text-align: center;
+}
+
+#stress-bar-wrapper {
+  width: 300px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#stress-bar {
+  height: 100%;
+  width: 0%;
+  background: #4CAF50;
+  transition: width 0.3s, background-color 0.3s;
+}
+
+#stress-text {
+  color: white;
+  font-size: 1.2rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px black;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-2px, 2px) rotate(-0.5deg); }
+  50% { transform: translate(2px, -2px) rotate(0.5deg); }
+  75% { transform: translate(-2px, -2px) rotate(-0.5deg); }
+}
+
+@keyframes intense-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  10% { transform: translate(-10px, 10px) rotate(-2deg); }
+  20% { transform: translate(10px, -10px) rotate(2deg); }
+  30% { transform: translate(-10px, -10px) rotate(-2deg); }
+  40% { transform: translate(10px, 10px) rotate(2deg); }
+  50% { transform: translate(-10px, 10px) rotate(-2deg); }
+  60% { transform: translate(10px, -10px) rotate(2deg); }
+  70% { transform: translate(-10px, -10px) rotate(-2deg); }
+  80% { transform: translate(10px, 10px) rotate(2deg); }
+  90% { transform: translate(-10px, 10px) rotate(-2deg); }
+}
+
+/* Meltdown Overlay */
+#meltdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: flash 0.5s infinite;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+#meltdown-content {
+  text-align: center;
+  color: white;
+  padding: 40px;
+}
+
+.meltdown-title {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-5px, 5px); }
+  40% { transform: translate(5px, -5px); }
+  60% { transform: translate(-5px, -5px); }
+  80% { transform: translate(5px, 5px); }
+  100% { transform: translate(0); }
+}
+
+.meltdown-message {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.calm-down-link,
+.reset-button {
+  display: inline-block;
+  padding: 15px 30px;
+  margin: 10px;
+  background: white;
+  color: black;
+  text-decoration: none;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+
+.calm-down-link:hover,
+.reset-button:hover {
+  transform: scale(1.1);
+  background: #A8DADC;
+}
+/* Stress Indicator - Top Left */
+#stress-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;  /* Changed from center to left */
+  z-index: 100;
+  text-align: left;  /* Changed from center to left */
+  transform: none;  /* Remove the centering transform */
+}
+
+#stress-bar-wrapper {
+  width: 250px;  /* Made slightly smaller */
+  height: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#stress-bar {
+  height: 100%;
+  width: 0%;
+  background: #4CAF50;
+  transition: width 0.3s, background-color 0.3s;
+}
+
+#stress-text {
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px black;
 }
