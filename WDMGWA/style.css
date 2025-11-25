@@ -2,6 +2,8 @@ body{
     background: #000000;
     color: #E0E0E0;
     font-family: 'Goldman';
+    font-size: 25px;
+    text-align: center;
 }
 .main{
   width: 100%;
@@ -42,7 +44,7 @@ height: 100vh;
   font-size: 50px;
   border: none;
   font-family: 'Goldman';
-  padding-left: 225px;
+ padding-right:900px;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -60,7 +62,7 @@ height: 100vh;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  padding-left: 200px;
+  padding-right: 900px;
 }
 
 /* Links inside the dropdown */
@@ -89,9 +91,39 @@ body{
   height:100vh;
   overflow:hidden;
 }
-svg#chicken{
+/* svg#chicken{
   width:1000px;
   border:2px solid blue;
+
+}
+.scrolling-text {
+  white-space: nowrap; /* Keeps text on one line 
+  overflow: hidden;
+  animation: scroll 6.8s linear infinite;
+} */
+
+.typing-text {
+  font-size: 30px;
+  overflow: hidden;
+  white-space: nowrap; /* ADD THIS - keeps text on one line */
+  border-right: 2px solid;
+  width: 0;
+  animation: typing 4s steps(100) forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
 }
 
 
