@@ -23,7 +23,7 @@ stroke: #FFAC63;
 }
 
 .menu{
-height: 100vh;
+height: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -40,7 +40,7 @@ height: 100vh;
 .dropbtn {
   background-color: black;
   color: #FFD4AE;
-  padding: 16px;
+  padding: 16px 32px;
   font-size: 50px;
   border: none;
   font-family: 'Goldman';
@@ -59,10 +59,9 @@ height: 100vh;
   display: none;
   position: absolute;
   background-color: black;
-  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  padding-right: 900px;
+  min-width: 200px;
 }
 
 /* Links inside the dropdown */
