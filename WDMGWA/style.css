@@ -1,57 +1,129 @@
 body{
     background: #000000;
     color: #E0E0E0;
-    font-family: 'Goldman';
-    font-size: 25px;
+    font-family: 'Karantina', system-ui;
+    font-size: 100px;
     text-align: center;
+    margin: 0;
+    width: 100%; 
+    height: 100vh;
+    overflow-x: hidden;
 }
-.main{
-  width: 100%;
+.container {
   display: flex;
+  gap: 40px;
   justify-content: center;
-  text-align: center; 
-  font-size: 60px;
+  position: absolute; 
+  top: 300px;
+  background: #FF7B07;
+     width: 750px;
+    height: 370px;
+  border-radius: 52px;
 }
+
+.card{
+  text-align: center;
+  transition: transform 0.3s ease, z-index 0s; 
+  cursor: pointer;
+  position: relative; 
+  z-index: 1; /* Default layer */
+}
+
+/* When you hover on a card, it comes to front and grows */
+.card:hover {
+  transform: rotate(5deg) scale(1.2); /* Increased scale for more dramatic effect */
+  z-index: 10; /* Brings it to the front */
+}
+
+/* Optional: Make non-hovered cards slightly dim */
+.container:hover .card:not(:hover) {
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.card h2 {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.card-image {
+  width: 180px;
+  height: 240px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card p {
+  color: white;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.main{
+  margin: 0; /* Remove default h1 margin */
+  font-size: 90px;
+}
+
 .logo{
-position:fixed;
-top:10px;
-left:10px;
-width: 98px;
-height: 66px;
-stroke-width: 9px;
-stroke: #FFAC63;
+  position: fixed;
+  top: 40px;
+  left: 40px;
+  height: 100px;
+  stroke-width: 9px;
+  stroke: #FFAC63;
 }
 
 .menu{
-height: 100px;
+  height: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center; /* Vertically centers the items */
   text-align: center; 
-  padding-top: 10vh;
   font-size: 60px;
-
+  padding-top:4vh ;
+  gap: 20px; /* Space between text and dropdown */
 }
+
 .sticky{
-    padding-bottom: 100px;
+    font-family: 'Karantina', system-ui;
 }
 
-/* Dropdown Button */
+/* Dropdown Button - for the top MENU */
 .dropbtn {
   background-color: black;
   color: #FFD4AE;
   padding: 16px 32px;
   font-size: 50px;
   border: none;
-  font-family: 'Goldman';
- padding-right:900px;
+  font-family: 'Karantina', system-ui;
+  cursor: pointer;
+}
+
+/* Dropdown Button 2 - for the SELECT button */
+.dropbtn2 {
+  background-color: black;
+  color: #FFD4AE;
+  padding: 16px 32px;
+  font-size: 50px;
+  border: none;
+  font-family: 'Karantina', system-ui;
+  cursor: pointer;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
-  justify-content: top;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -60,8 +132,9 @@ height: 100px;
   position: absolute;
   background-color: black;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 99;
   min-width: 200px;
+
 }
 
 /* Links inside the dropdown */
@@ -76,35 +149,25 @@ height: 100px;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #474747;}
+.dropdown-content a:hover {
+  background-color: #474747;
+}
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: black;}
-
-body{
-  margin:0;
-  width:100%; 
-  height:100vh;
-  overflow:hidden;
+.dropdown:hover .dropbtn,
+.dropdown:hover .dropbtn2 {
+  background-color: black;
 }
-/* svg#chicken{
-  width:1000px;
-  border:2px solid blue;
-
-}
-.scrolling-text {
-  white-space: nowrap; /* Keeps text on one line 
-  overflow: hidden;
-  animation: scroll 6.8s linear infinite;
-} */
 
 .typing-text {
   font-size: 30px;
   overflow: hidden;
-  white-space: nowrap; /* ADD THIS - keeps text on one line */
+  white-space: nowrap;
   border-right: 2px solid;
   width: 0;
   animation: typing 4s steps(100) forwards, blink 0.75s step-end infinite;
@@ -125,4 +188,31 @@ body{
   }
 }
 
+.karantina-light {
+  font-family: "Karantina", system-ui;
+  font-weight: 300;
+  font-style: normal;
+}
 
+.karantina-regular {
+  font-family: "Karantina", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.karantina-bold {
+  font-family: "Karantina", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+ .box{
+  width: 969px;
+  height: 486px;
+  border-radius: 52px;
+  background: #FF7B07; 
+}
+a {
+  text-decoration: none;
+  color: #FFD4AE;
+
+}

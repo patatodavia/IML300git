@@ -1,8 +1,8 @@
 let words = [
-  {text : "LOREM", x :400, y:40},
-  {text : "IPSUM", x :200, y:50},
-  {text : "DOLOR", x :300, y:300},
-  {text : "SOMETHING", x :200, y:200},
+  {text : "AUTHENTICITY", x :400, y:100},
+  {text : "ACCURATE LOCATION", x :200, y:50},
+  {text : "CASTING", x :300, y:300},
+  {text : "RESPECT", x :200, y:200},
 ];
 
 function setup() {
