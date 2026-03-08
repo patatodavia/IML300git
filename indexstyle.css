@@ -88,6 +88,7 @@ body{
         }
         h2 {
             font-size: 40px;
+            color: rgba(0,0,0,0.7);
         }
         a {
             color: rgb(0, 255, 34);
@@ -121,4 +122,292 @@ body{
   cursor: pointer;
   margin: 40px 20px;
   display: inline-block;
+}
+/* ul {
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+li {
+  scroll-snap-align: center;
+}
+ul::scroll-button(*) {
+  border: 0;
+  font-size: 2rem;
+  background: none;
+  color: black;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+ul::scroll-button(*):hover,
+ul::scroll-button(*):focus {
+  opacity: 1;
+}
+
+ul::scroll-button(*):active {
+  translate: 1px 1px;
+}
+
+ul::scroll-button(*):disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+ul::scroll-button(left) {
+  content: "◄" / "Previous";
+}
+
+ul::scroll-button(right) {
+  content: "►" / "Next";
+}
+ul {
+  anchor-name: --my-carousel;
+}
+
+ul::scroll-button(*) {
+  position: absolute;
+  position-anchor: --my-carousel;
+}
+ul::scroll-button(left) {
+  right: calc(anchor(left) - 70px);
+  bottom: calc(anchor(top) + 13px);
+}
+
+ul::scroll-button(right) {
+  left: calc(anchor(right) - 70px);
+  bottom: calc(anchor(top) + 13px);
+} */
+
+/* ============================================
+   CAROUSEL STYLES
+   ============================================ */
+
+/* ============================================
+   CAROUSEL STYLES
+   ============================================ */
+
+/* ============================================
+   CAROUSEL STYLES
+   ============================================ */
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: inherit;
+  
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+   border: 2px solid #ffffff;
+}
+
+.carousel-track {
+  display: flex;
+  align-items: flex-start;
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  background: #1d1d1d;
+  box-sizing: border-box;
+}
+
+/* --- Media area --- */
+
+.slide-media {
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 16px 8px;
+  justify-content: center;
+  background: #000000;
+  height: 420px;
+  align-items: center;
+}
+
+.slide-media img,
+.slide-media iframe {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  object-fit: contain;
+  flex: 1 1 45%;
+  align-items: center;
+
+}
+
+.slide-media iframe {
+  flex: 1 1 100%;
+  min-height: 300px;
+}
+
+/* --- Caption area --- */
+
+.slide-caption {
+  padding: 20px 24px;
+  background: #000000;
+}
+
+.slide-caption h2 {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.slide-caption p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* --- Arrow buttons --- */
+
+.carousel-btn {
+  position: absolute;
+  top: calc(50% - 30px);
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.92);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 10;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.carousel-btn:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev { left: -22px; }
+.carousel-btn.next { right: -22px; }
+
+/* --- Dot indicators --- */
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.carousel-dot.active {
+  background: #333;
+  transform: scale(1.3);
+}
+
+/* --- Autoplay toggle --- */
+
+.autoplay-toggle {
+  display: block;
+  margin: 10px auto 0;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: #777;
+  letter-spacing: 1px;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.autoplay-toggle:hover {
+  border-color: #333;
+  color: #333;
+}
+
+/* ============================================
+   DROPDOWN NAV STYLES
+   ============================================ */
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+  z-index: 100;
+  margin: 40px 20px;
+}
+
+.nav-dropdown-btn {
+  background-color: rgb(145, 249, 150);
+  color: #000000;
+  padding: 8px 50px;
+  font-size: 50px;
+  border: 2px solid rgb(145, 249, 150);
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: 'Karantina', system-ui;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.nav-dropdown-btn:hover {
+  text-decoration: none;
+  background-color: rgb(0, 255, 34);
+  border-color: rgb(0, 255, 34);
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 100%;
+  background-color: #000;
+  border: 2px solid rgb(145, 249, 150);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 200;
+  flex-direction: column;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  display: flex;
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: 10px 30px;
+  font-size: 30px;
+  font-family: 'Karantina', system-ui;
+  font-weight: bold;
+  color: rgb(145, 249, 150);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(145, 249, 150, 0.2);
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+.nav-dropdown-menu a:hover {
+  background-color: rgb(0, 255, 34);
+  color: #000;
+  text-decoration: none;
 }

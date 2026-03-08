@@ -7,12 +7,40 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
   <script src="Blob2.js"></script>
   <link rel="stylesheet" href="indexstyle.css">
+ <script src="Carousel.js"></script>
   </head>
 <body>
-    <nav style= " padding: 20px; position: relative; z-index: 10;">
-<a class="dropbtn" href="index.html"> HOME </a>
+ <div class="nav-dropdown">
+  <span class="nav-dropdown-btn">MENU ▾</span>
+  <div class="nav-dropdown-menu">
+    <a href="index.html">HOME</a>
+    <a href="FabLab.html">FAB LAB (Laser Engraving) PROJECTS</a>
+    <a href="CharacterEnvironment.html">CHARACTER & ENVIRONMENT DESIGN</a>
+    <a href="GraphicDesign.html">GRAPHIC DESIGN PROJECTS</a>
+    <a href="coding.html">CODING PROJECTS</a>
+  </div>
+</div>
     </nav>
+
 <div class="content">
+<h1>Fabrication Lab Projects</h1>
+<p>I currently am a student tech at the USC Fab Lab, where there are 3D Printers as well as a Laser Cutter. Below are some of my projects using these machines.</p>
+
+<!-- <ul>
+  <li data-accName="Item 1">
+    <h2>Page 1</h2>
+  </li>
+  <li data-accName="Item 2">
+    <h2>Page 2</h2>
+  </li>
+  <li data-accName="Item 3">
+    <h2>Page 3</h2>
+  </li>
+  <li data-accName="Item 4">
+    <h2>Page 4</h2>
+  </li>
+</ul>
+
     <h1> I currently am a student tech at the USC Fab Lab, where there are 3D Printers as well as a Laser Cutter. Below are some of my projects using these machines.</h1>
 <p> This is a video that shows how I made a puppet of one of my character designs. It has replaceable expressions for faces and is made of both poplar wood, wire, and leather.</p>
 <iframe src="https://vimeo.com/1170124212?share=copy&fl=sv&fe=ci" width="50%" height="600" title="p5.js Sketch 1" style="border:1px solid #ccc;"></iframe>
@@ -36,4 +64,130 @@
     <img src="Token4.jpeg" style="width:40%; height:auto;"> 
     <p> This is one of my first projects on the Laser Cutter. I designed a series of Phonecian boat tokens for a project called tokenizing Lebanon.</p>
     <img src="Boat1.png" style="width:60%; height:auto;">
-    <img src="Boat2.png" style="width:40%; height:auto;">
+    <img src="Boat2.png" style="width:40%; height:auto;"> -->
+    
+    <div class="carousel-wrapper">
+  <div class="carousel-track-container">
+    <div class="carousel-track">
+
+      <!-- Slide 1: Puppet -->
+      
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <img src="Screenshot 2026-03-05 at 11.45.34 AM.png" alt="Puppet full view">
+          <img src="LittlePuppetJacket.png" alt="Puppet jacket close-up">
+        </div>
+        <div class="slide-caption">
+          <h2>Wood & Leather Puppet</h2>
+          <p>A puppet of one of my character designs with replaceable expressions, made of poplar wood, wire, and leather.</p>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <iframe src="https://vimeo.com/1170124212?share=copy&fl=sv&fe=ci" width="100%" height="400" title="Puppet Video" style="border:none;"></iframe>
+        </div>
+        <div class="slide-caption">
+          <h2>Wood & Leather Puppet Production Video</h2>
+          <p>A video showing the production of the puppet on the previous page.</p>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="slide-media">
+            <img src="Screenshot 2026-03-08 at 1.26.30 AM.png" alt="Puppet pants sewn">
+        </div>
+        <div class="slide-caption">
+          <h2>Wood & Leather Puppet Part 2</h2>
+          <p>Pants redone and sewn with a different type of leather.</p>
+        </div>
+      </div>
+
+      <!-- Slide 2: Material Templates -->
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <img src="LeatherMatTemp.png" alt="Leather material template">
+          <img src="LaserAcrylic.png" alt="Acrylic laser template">
+        </div>
+        <div class="slide-caption">
+          <h2>Material Templates</h2>
+          <p>Laser settings templates I created for the USC Fab Lab, testing raster and vector settings for Leather and Acrylic.</p>
+        </div>
+      </div>
+
+      <!-- Slide 3: Keychain -->
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <img src="Zapachu Acrylic.png" alt="Custom acrylic keychain">
+        </div>
+        <div class="slide-caption">
+          <h2>Custom Keychain</h2>
+          <p>A custom keychain I designed and laser cut from acrylic.</p>
+        </div>
+      </div>
+
+      <!-- Slide 4: Tokens -->
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <img src="Token1.png" alt="Token 1">
+          <img src="Token2.png" alt="Token 2">
+        </div>
+        <div class="slide-caption">
+          <h2>Art Market Tokens</h2>
+          <p>Tokens I designed and laser cut to sell at an upcoming local art market.</p>
+        </div>
+      </div>
+
+      <!-- Slide 5: Frames -->
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <img src="FrameLaserCut.png" alt="Laser cut frame">
+          <img src="DuneLserCutFInal.png" alt="Dune laser cut frame">
+        </div>
+        <div class="slide-caption">
+          <h2>Custom Laser Cut Frames</h2>
+          <p>Frames I designed and laser cut as gifts for my sister and dad.</p>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <img src="DesignFrame.png" alt="Frame design">
+          <img src="DesignFrame2.png" alt="Frame design 2">
+          <img src="Token4.jpeg" alt="Token 4">
+        </div>
+        <div class="slide-caption">
+          <h2>Custom Laser Cut Frames Part 2</h2>
+          <p>Frames I designed and laser cut as gifts for my sister and dad.</p>
+        </div>
+      </div>
+
+
+
+      <!-- Slide 6: Phoenician Boats -->
+      <div class="carousel-slide">
+        <div class="slide-media">
+          <img src="Boat1.png" alt="Phoenician boat token">
+          <img src="Boat2.png" alt="Phoenician boat token 2">
+        </div>
+        <div class="slide-caption">
+          <h2>Phoenician Boat Tokens</h2>
+          <p>One of my first laser cutter projects — a series of Phoenician boat tokens for a project called Tokenizing Lebanon.</p>
+        </div>
+      </div>
+
+    </div><!-- end .carousel-track -->
+  </div><!-- end .carousel-track-container -->
+
+  <!-- Arrows -->
+  <button class="carousel-btn prev" aria-label="Previous slide">&#8592;</button>
+  <button class="carousel-btn next" aria-label="Next slide">&#8594;</button>
+
+  <!-- Dot indicators -->
+  <div class="carousel-dots"></div>
+
+  <!-- Autoplay toggle -->
+  <button class="autoplay-toggle" aria-label="Pause autoplay">&#9646;&#9646;</button>
+</div>
+
+    
